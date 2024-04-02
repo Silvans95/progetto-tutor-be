@@ -1,6 +1,7 @@
 package it.java.tutor.dto;
 
 import it.java.tutor.model.Product;
+import it.java.tutor.model.StatusEnum;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 
@@ -21,6 +22,9 @@ public class ProductDto implements Serializable {
 
     private String productDescription;
 
+    @NonNull
+    private StatusEnum status;
+
     @Min(value = 0)
     @NonNull
     private Double price;
@@ -30,6 +34,7 @@ public class ProductDto implements Serializable {
                 .id(dto.id)
                 .productName(dto.productName)
                 .productDescription(dto.productDescription)
+                .status(dto.status)
                 .price(dto.price)
                 .build();
     }
@@ -39,6 +44,7 @@ public class ProductDto implements Serializable {
                 .id(model.getId())
                 .productName(model.getProductName())
                 .productDescription(model.getProductDescription())
+                .status(model.getStatus())
                 .price(model.getPrice())
                 .build();
     }

@@ -23,6 +23,9 @@ public class Product {
     @Column(name = "product_description")
     private String productDescription;
 
+    @Column(name = "status")
+    private StatusEnum status;
+
     @Column(name = "price", nullable = false)
     private double price;
 

@@ -31,9 +31,10 @@ public class ProductController {
         try {
             ProductDto response = productService.insertProduct(productDto);
             log.info("Product created with id: " + response.getId());
-            return ResponseEntity.status(HttpStatus.OK).body(response.toString());
+            return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e) {
             log.error("Error creating product: " + e.getMessage());
+            log.error(e.getStackTrace());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
 
