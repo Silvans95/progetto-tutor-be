@@ -1,11 +1,10 @@
 package it.java.tutor.dto;
 
 import it.java.tutor.model.Product;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Min;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +12,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductDto {
+public class ProductDto implements Serializable {
 
     private Long id;
+
+    @NonNull
     private String productName;
+
     private String productDescription;
-    private double price;
+
+    @Min(value = 0)
+    @NonNull
+    private Double price;
 
     public static Product fromDTOtoModel(ProductDto dto) {
         return Product.builder()

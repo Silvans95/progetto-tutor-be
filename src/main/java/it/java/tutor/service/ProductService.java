@@ -2,6 +2,9 @@ package it.java.tutor.service;
 
 import it.java.tutor.dto.ProductDto;
 import it.java.tutor.repository.ProductRepository;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
+import org.hibernate.PropertyValueException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,5 +27,5 @@ public class ProductService {
         return ProductDto.fromModelToDTO(productRepository.save(ProductDto.fromDTOtoModel(dto)));
     }
 
-
 }
+
