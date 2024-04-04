@@ -1,6 +1,7 @@
 package it.java.tutor.service;
 
 import it.java.tutor.dto.ProductDto;
+import it.java.tutor.exception.TutorException;
 import it.java.tutor.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,15 @@ public class ProductService {
         return ProductDto.fromModelListToDTOList(productRepository.findAll());
     }
 
-    public ProductDto insertProduct(ProductDto dto) {
+    public ProductDto insertProduct(ProductDto dto) throws TutorException {
+
+        if (dto.getProductName() == null || dto.getProductName().isEmpty() || dto.getProductName().isBlank()) {
+            throw TutorException.badRequest("Product name must be valued");
+        }
+        if (dto.getPrice() <= 0) {
+            throw TutorException.badRequest("Product price must be greater than zero");
+        }
+
         return ProductDto.fromModelToDTO(productRepository.save(ProductDto.fromDTOtoModel(dto)));
     }
 

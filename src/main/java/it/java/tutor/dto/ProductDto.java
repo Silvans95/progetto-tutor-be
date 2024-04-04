@@ -17,16 +17,13 @@ public class ProductDto implements Serializable {
 
     private Long id;
 
-    @NonNull
     private String productName;
 
     private String productDescription;
 
-    @NonNull
     private StatusEnum status;
 
     @Min(value = 0)
-    @NonNull
     private Double price;
 
     public static Product fromDTOtoModel(ProductDto dto) {

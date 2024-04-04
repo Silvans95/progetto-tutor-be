@@ -1,6 +1,7 @@
 package it.java.tutor.controller;
 
 import it.java.tutor.dto.ProductDto;
+import it.java.tutor.exception.TutorException;
 import it.java.tutor.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -29,13 +30,14 @@ public class ProductController {
     public ResponseEntity<String> insertProduct(@RequestBody ProductDto productDto) {
 
         try {
+
             ProductDto response = productService.insertProduct(productDto);
             log.info("Product created with id: " + response.getId());
             return ResponseEntity.status(HttpStatus.OK).build();
-        } catch (Exception e) {
-            log.error("Error creating product: " + e.getMessage());
+
+        } catch (TutorException e) {
             log.error(e.getStackTrace());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), e.getHttpStatus());
         }
 
     }
