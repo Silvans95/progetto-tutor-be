@@ -1,5 +1,6 @@
 package it.java.tutor.controller;
 
+import it.java.tutor.dto.ProductAutocompleteDto;
 import it.java.tutor.dto.ProductDto;
 import it.java.tutor.exception.TutorException;
 import it.java.tutor.service.ProductService;
@@ -23,6 +24,11 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductDto>> getAllProduct() {
         return ResponseEntity.status(HttpStatus.OK).body(productService.getAllProducts());
+    }
+
+    @GetMapping("/{productName}")
+    public ResponseEntity<List<ProductAutocompleteDto>> getProductsByNameLike(@PathVariable String productName) {
+        return ResponseEntity.status(HttpStatus.OK).body(this.productService.getProductsByNameLike(productName));
     }
 
 

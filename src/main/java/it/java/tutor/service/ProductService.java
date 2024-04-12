@@ -1,5 +1,6 @@
 package it.java.tutor.service;
 
+import it.java.tutor.dto.ProductAutocompleteDto;
 import it.java.tutor.dto.ProductDto;
 import it.java.tutor.exception.TutorException;
 import it.java.tutor.repository.ProductRepository;
@@ -21,6 +22,10 @@ public class ProductService {
         return ProductDto.fromModelListToDTOList(productRepository.findAll());
     }
 
+    public List<ProductAutocompleteDto> getProductsByNameLike(String productName) {
+        return this.productRepository.findByNameLike(productName);
+    }
+
     public ProductDto insertProduct(ProductDto dto) throws TutorException {
 
         if (dto.getProductName() == null || dto.getProductName().isEmpty() || dto.getProductName().isBlank()) {
@@ -32,6 +37,7 @@ public class ProductService {
 
         return ProductDto.fromModelToDTO(productRepository.save(ProductDto.fromDTOtoModel(dto)));
     }
+
 
 }
 
